@@ -1,4 +1,4 @@
-package ru.averkiev.my_linked_list;
+package ru.averkiev.my_linked_list_old;
 
 /**
  * Класс злодея

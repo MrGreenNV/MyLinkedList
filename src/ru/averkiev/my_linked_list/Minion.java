@@ -1,22 +1,15 @@
 package ru.averkiev.my_linked_list;
 
-/**
- * Класс хранимого элемента, в данном случае - Миньон.
- */
 public class Minion {
-    private static long count = 0;      // Количество миньонов, прошедших через добавление в список.
-    private long id;                    // ID минона.
-    private String name;                // Имя миньона.
-    private Villain patron;             // Злодей, покровительствующий над миньоном.
 
-    public Minion(String name, Villain patron) {
+    private String name;
+    private int age;
+    private String patron;
+
+    public Minion(String name, int age, String patron) {
         this.name = name;
+        this.age = age;
         this.patron = patron;
-        id = count++;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getName() {
@@ -27,11 +20,19 @@ public class Minion {
         this.name = name;
     }
 
-    public Villain getPatron() {
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPatron() {
         return patron;
     }
 
-    public void setPatron(Villain patron) {
+    public void setPatron(String patron) {
         this.patron = patron;
     }
 }

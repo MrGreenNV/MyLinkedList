@@ -1,43 +1,34 @@
 package ru.averkiev.my_linked_list;
 
-/**
- * Класс элемента списка.
- */
-public class Node {
-    private Minion minion;                          // Хранимый объект. В нашем случае - Миньон.
-    private Node next;                              // Ссылка на следующий элемент списка.
-    private Node previous;                          // Ссылка на предыдущий элемент списка.
+import java.util.LinkedList;
 
-    public Node(Minion minion, Node next, Node previous) {
-        this.minion = minion;
-        this.next = next;
-        this.previous = previous;
-    }
+public class Node<T> {
 
-    public Node() {
-    }
 
-    public Minion getMinion() {
-        return minion;
-    }
+    T item;
+        Node<T> next;
+        Node<T> prev;
 
-    public void setMinion(Minion minion) {
-        this.minion = minion;
-    }
+        Node(Node<T> prev, T element, Node<T> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
 
-    public Node getNext() {
-        return next;
-    }
 
-    public void setNext(Node next) {
-        this.next = next;
-    }
+    Node<T> node(int index) {
+        // assert isElementIndex(index);
 
-    public Node getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(Node previous) {
-        this.previous = previous;
+        if (index < (MyLinkedList.size >> 1)) {
+            Node<T> x = first;
+            for (int i = 0; i < index; i++)
+                x = x.next;
+            return x;
+        } else {
+            Node<T> x = last;
+            for (int i = MyLinkedList.size - 1; i > index; i--)
+                x = x.prev;
+            return x;
+        }
     }
 }
