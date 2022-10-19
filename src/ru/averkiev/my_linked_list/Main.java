@@ -5,12 +5,12 @@ public class Main {
     static MyLinkedList minionList = new MyLinkedList();
 
     public static void main(String[] args) {
-        MenuController.clearMenu();
-        MenuController.showMainMenu();
-        MenuController.selectAction();
-        MenuController.download();
 
         while (true) {
+            MenuController.clearMenu();
+            MenuController.showMainMenu();
+            MenuController.selectAction();
+            MenuController.download();
             switch (MenuController.getChoiceUser()) {
                 case 1 -> MenuController.addElement();
                 case 2 -> MenuController.deleteElement();
@@ -24,10 +24,6 @@ public class Main {
                     MenuController.selectAction();
                 }
             }
-            MenuController.clearMenu();
-            MenuController.showMainMenu();
-            MenuController.selectAction();
-            MenuController.download();
         }
     }
 }
