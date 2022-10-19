@@ -1,11 +1,15 @@
 package ru.averkiev.my_linked_list;
 
+/**
+ * Основной класс
+ */
 public class Main {
-
+    // Инициализация списка элементов
     static MyLinkedList minionList = new MyLinkedList();
 
     public static void main(String[] args) {
 
+        // Основной цикл работы программы. Крутится пока пользователь не выберет выход из программы.
         while (true) {
             MenuController.clearMenu();
             MenuController.showMainMenu();

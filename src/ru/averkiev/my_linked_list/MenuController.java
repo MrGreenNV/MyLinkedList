@@ -7,14 +7,20 @@ import java.util.Random;
 
 import static ru.averkiev.my_linked_list.Main.minionList;
 
+/**
+ * Класс для взаимодействия пользователя с меню.
+ */
 public class MenuController {
 
-    private static int choiceUser = -1;
+    private static int choiceUser = -1;         // Пользовательский выбор пункта меню.
 
     public static int getChoiceUser() {
         return choiceUser;
     }
 
+    /**
+     * Вывод главного меню пользователю.
+     */
     public static void showMainMenu() {
         try {
             System.out.println("Главное меню:");
@@ -39,7 +45,10 @@ public class MenuController {
         }
     }
 
-    public static void showAddMenu() {
+    /**
+     * Вывод меню обновления пользователю.
+     */
+    public static void showUpdateMenu() {
         try {
             System.out.println("Меню обновления:");
             System.out.println("----------------------------------------");
@@ -61,6 +70,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Скролл экрана для очистки.
+     */
     public static void clearMenu() {
         for (int i = 0; i < 100; i++) {
             System.out.println();
@@ -72,13 +84,15 @@ public class MenuController {
         }
     }
 
+    /**
+     * Симуляция загрузки действия.
+     */
     public static void download() {
         try {
             Random random = new Random();
-            System.out.println();
             for (int i = 0; i < 40; i++) {
                 System.out.print(".");
-                Thread.sleep((random.nextInt(100) + 50));
+                Thread.sleep((random.nextInt(10) + 50));
             }
             System.out.println();
         } catch (InterruptedException ex) {
@@ -86,6 +100,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Ввод пользователем выбранного пункта меню.
+     */
     public static void selectAction() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
@@ -99,6 +116,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Подготовка данных для добавления элемента.
+     */
     public static void addElement() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
@@ -113,9 +133,12 @@ public class MenuController {
 
             minionList.add(minion);
 
+            System.out.println();
+            System.out.println("Добавление элемента..");
             download();
             System.out.println("Новый миньон успешно добавлен!");
 
+            System.out.println();
             System.out.print("Для продолжение нажмите Enter.");
             reader.readLine();
 
@@ -124,6 +147,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Подготовка данных для удаления элемента.
+     */
     public static void deleteElement() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         long id;
@@ -131,7 +157,7 @@ public class MenuController {
             System.out.print("Введите ID удаляемого миньона: ");
             while (true) {
                 id = Integer.parseInt(reader.readLine());
-                if (id > 0) {
+                if (id >= 0) {
                     break;
                 } else {
                     System.out.println("Введите положительный ID миньона!");
@@ -148,6 +174,7 @@ public class MenuController {
                 System.out.println("С таким ID миньон не найден!");
             }
 
+            System.out.println();
             System.out.print("Для продолжение нажмите Enter.");
             reader.readLine();
 
@@ -156,6 +183,9 @@ public class MenuController {
         }
     }
 
+    /**
+     * Подготовка данных для обновления элемента.
+     */
     public static void updateElement() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         long id;
@@ -170,7 +200,8 @@ public class MenuController {
                 }
             }
 
-            showAddMenu();
+            clearMenu();
+            showUpdateMenu();
             selectAction();
 
             boolean resultUpdateMinion = false;
@@ -214,6 +245,7 @@ public class MenuController {
                 System.out.println("С таким ID миньон не найден!");
             }
 
+            System.out.println();
             System.out.print("Для продолжение нажмите Enter.");
             reader.readLine();
 
@@ -223,17 +255,20 @@ public class MenuController {
 
     }
 
+    /**
+     * Подготовка данных для просмотра элементов из списка.
+     */
     public static void showList() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         minionList.showList();
 
         try {
-            System.out.println("Для продолжение нажмите Enter");
+            System.out.println();
+            System.out.print("Для продолжение нажмите Enter.");
             reader.readLine();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
-
 }

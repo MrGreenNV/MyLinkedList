@@ -1,9 +1,12 @@
 package ru.averkiev.my_linked_list;
 
+/**
+ * Класс элемента списка.
+ */
 public class Node {
-    private Minion minion;
-    private Node next;
-    private Node previous;
+    private Minion minion;                          // Хранимый объект. В нашем случае - Миньон.
+    private Node next;                              // Ссылка на следующий элемент списка.
+    private Node previous;                          // Ссылка на предыдущий элемент списка.
 
     public Node(Minion minion, Node next, Node previous) {
         this.minion = minion;
