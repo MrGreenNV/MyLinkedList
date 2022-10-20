@@ -35,4 +35,9 @@ public class Minion {
     public void setPatron(String patron) {
         this.patron = patron;
     }
+
+    @Override
+    public String toString() {
+        return "{ name: " + getName() + "; age: " + getAge() + "; patron: " + getPatron() + " }";
+    }
 }

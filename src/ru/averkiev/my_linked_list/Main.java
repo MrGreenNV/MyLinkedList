@@ -1,9 +1,5 @@
 package ru.averkiev.my_linked_list;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-
 /**
  * Основной класс
  */
@@ -13,8 +9,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        LinkedList<String> list = new LinkedList<>();
-        list.get()
         // Основной цикл работы программы. Крутится пока пользователь не выберет выход из программы.
         while (true) {
             MenuController.clearMenu();

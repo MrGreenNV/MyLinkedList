@@ -1,9 +1,9 @@
 package ru.averkiev.my_linked_list;
 
 public interface MyList<T> {
-
+    T get(int index);
     void add(T t);
-    boolean delete(T t);
-    boolean update(T t1, T t2);
+    boolean delete(int index);
+    boolean update(int index, T element);
 
 }
