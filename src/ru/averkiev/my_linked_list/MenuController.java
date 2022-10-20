@@ -116,15 +116,29 @@ public class MenuController {
      */
     public static void addElement() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String minionName = "";
+        String patronName = "";
+        int ageMinion = -1;
         try {
             System.out.print("Введите имя миньона: ");
-            String minionName = reader.readLine();
+            minionName = reader.readLine();
+        } catch (IOException ex) {
+            System.out.println("Введите корректное имя!");
+        }
 
+        try {
             System.out.print("Введите возраст миньона: ");
-            int ageMinion = Integer.parseInt(reader.readLine());
+            ageMinion = Integer.parseInt(reader.readLine());
+            if (ageMinion < 0 || ageMinion > 100) {
+                throw new IOException();
+            }
+        } catch (IOException ex) {
+            System.out.println("Введите целое число от 0 до 100!");
+        }
 
+        try {
             System.out.print("Введите имя покровителя миньона: ");
-            String patronName = reader.readLine();
+            patronName = reader.readLine();
 
             Minion minion = new Minion(minionName, ageMinion, patronName);
 
@@ -140,7 +154,7 @@ public class MenuController {
             reader.readLine();
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Введите корректное имя!");
         }
     }
 
@@ -185,70 +199,88 @@ public class MenuController {
      */
     public static void updateElement() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        int index;
+        int index = -1;
         try {
             System.out.print("Введите индекс обновляемого миньона: ");
             while (true) {
                 index = Integer.parseInt(reader.readLine());
-                if (index >= 0) {
+                if (index >= 0 && index < MyLinkedList.size) {
                     break;
                 } else {
-                    System.out.println("Введите положительный ID миньона!");
+                    System.out.println("Введите положительный индекс миньона в пределах списка!");
                 }
             }
+        } catch (IOException ex) {
+            System.out.println("Введите целое число!");
+        }
 
-            clearMenu();
-            showUpdateMenu();
-            selectAction();
+        clearMenu();
+        showUpdateMenu();
+        selectAction();
 
-            boolean resultUpdateMinion = false;
-            boolean isRightChoiceUser = false;
+        boolean resultUpdateMinion = false;
+        boolean isRightChoiceUser = false;
 
-            Minion updateMinion = Main.minionList.get(index);
+        Minion updateMinion = Main.minionList.get(index);
 
-            while (!isRightChoiceUser) {
-                switch (choiceUser) {
-                    case 1 -> {
-                        System.out.print("Введите имя миньона: ");
-                        String minionName = reader.readLine();
-                        updateMinion.setName(minionName);
-                        resultUpdateMinion = Main.minionList.update(index, updateMinion);
-                        isRightChoiceUser = true;
+        while (!isRightChoiceUser) {
+            switch (choiceUser) {
+                case 1 -> {
+                    String minionName = "";
+                    System.out.print("Введите имя миньона: ");
+                    try {
+                        minionName = reader.readLine();
+                    } catch (IOException ex) {
+                        System.out.println("Введите корректное имя!");
                     }
-                    case 2 -> {
-                        System.out.print("Введите возраст миньона: ");
-                        int minionAge = Integer.parseInt(reader.readLine());
-                        updateMinion.setAge(minionAge);
-                        resultUpdateMinion = Main.minionList.update(index, updateMinion);
-                        isRightChoiceUser = true;
+                    updateMinion.setName(minionName);
+                    resultUpdateMinion = Main.minionList.update(index, updateMinion);
+                    isRightChoiceUser = true;
+                }
+                case 2 -> {
+                    int minionAge = -1;
+                    System.out.print("Введите возраст миньона: ");
+                    try {
+                        minionAge = Integer.parseInt(reader.readLine());
+                    } catch (IOException ex) {
+                        System.out.println("Введите корректный возраст!");
                     }
-                    case 3 -> {
-                        System.out.print("Введите имя покровителя миньона: ");
-                        String patronName = reader.readLine();
-                        updateMinion.setPatron(patronName);
-                        resultUpdateMinion = Main.minionList.update(index, updateMinion);
-                        isRightChoiceUser = true;
+                    updateMinion.setAge(minionAge);
+                    resultUpdateMinion = Main.minionList.update(index, updateMinion);
+                    isRightChoiceUser = true;
+                }
+                case 3 -> {
+                    String patronName = "";
+                    System.out.print("Введите имя покровителя миньона: ");
+                    try {
+                        patronName = reader.readLine();
+                    } catch (IOException ex) {
+                        System.out.println("Введите корректное имя!");
                     }
-                    case 0 -> {
-                        return;
-                    }
-                    default -> {
-                        System.out.println("Выберите из существующих пунктов меню.");
-                        selectAction();
-                    }
+                    updateMinion.setPatron(patronName);
+                    resultUpdateMinion = Main.minionList.update(index, updateMinion);
+                    isRightChoiceUser = true;
+                }
+                case 0 -> {
+                    return;
+                }
+                default -> {
+                    System.out.println("Выберите из существующих пунктов меню.");
+                    selectAction();
                 }
             }
+        }
 
-            if (resultUpdateMinion) {
-                System.out.println("Миньон успешно обновлен!");
-            } else {
-                System.out.println("С таким ID миньон не найден!");
-            }
+        if (resultUpdateMinion) {
+            System.out.println("Миньон успешно обновлен!");
+        } else {
+            System.out.println("С таким ID миньон не найден!");
+        }
 
+        try {
             System.out.println();
             System.out.print("Для продолжение нажмите Enter.");
             reader.readLine();
-
         } catch (IOException ex) {
             System.out.println("Введите целое число!");
         }
